@@ -1,0 +1,63 @@
+.form-wrapper {
+  width: min(70%, 30rem);
+  height: 5rem;
+
+  position: relative;
+  padding: 15px;
+  z-index: 5;
+
+  background-color: var(--formBg);
+  box-shadow: 0 2px 4px rgba(44, 62, 80, 0.15);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.form-wrapper:has(form>label>:is(input[type='text'], button):focus) {
+  width: 100%;
+}
+
+.form-wrapper>form {
+  border-radius: .33rem;
+}
+
+.form-wrapper form input {
+  width: 100%;
+  height: var(--height);
+  color: #fff;
+  font-size: clamp(.8rem, 5vw, 1.2rem);
+  font-weight: normal;
+  text-indent: 1rem;
+
+  background: var(--notDone);
+  border: 0;
+  border-radius: calc(var(--height) / 5) calc(var(--height) / 2) calc(var(--height) / 5);
+
+  transition: all .3s;
+  box-shadow: none;
+  outline: none;
+}
+
+.form-wrapper form input:focus {
+  box-shadow: -2px 2px 7px rgb(29, 71, 77);
+}
+
+.form-wrapper form input:focus::placeholder {
+  font-size: 0;
+}
+
+.form-wrapper form button {
+  width: clamp(2rem, 4vw, 2.5rem);
+  height: clamp(2rem, 4vw, 2.5rem);
+  background: transparent url(../../assets/images/plus.png) no-repeat center/cover;
+  position: absolute;
+  top: 50%;
+  right: clamp(1.4rem, 2vw, 3rem);
+  transform: translateY(-50%);
+  z-index: 2;
+
+  border-radius: 25px;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+}

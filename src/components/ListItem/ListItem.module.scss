@@ -1,0 +1,43 @@
+.link {
+  font-size: calc(1.1 * clamp(.8rem, 1.5vw, 1.2rem));
+  text-decoration: none;
+
+  // Конструкция, которая позволяет показывать определенное кол-во строк
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+
+}
+
+.done {
+  color: var(--done);
+}
+
+ul {
+  list-style: disclosure-closed;
+
+  margin: 0;
+  padding: 0 0 0 1rem;
+}
+
+ul>li {
+  width: min(90%, 33rem);
+}
+
+li+li {
+  padding-top: clamp(.5rem, 1vw, 1rem);
+}
+
+li:has(a.done) {
+  color: var(--done-icon);
+}
+
+li:has(a.notDone) {
+  color: var(--notDone-icon);
+}
+
+.notDone {
+  color: var(--notDone);
+}

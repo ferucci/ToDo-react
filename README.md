@@ -1,46 +1,69 @@
-# Getting Started with Create React App
+# Установил дополнительно react-router-dom для роутинга
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Из которой достаю нужные компоненты, которые реализуют нужный роутинг
+Для настройки роутинга нужно обернуть главный компонент, в несколько компонентов обёрток.
+Данная кострукция (устаревшая) рендерит главный компонент:
+<Route path='/' element={<Pages />}>
+Для вывода Header на каждой странице проделал следующие действия:
+Над роутами(Routes) в главном файле вывожу Header.
 
-## Available Scripts
+  - Новый подход:
+В "новом" подходе создаётся папка layout и вней происходит вся магия.
+Он возвращает <Outlet /> - это место куда будут рендериться компоненты страниц. И туда же заносим дополнительные нужные страницы или элементы. В моём случае это Header.
+Далее создаём роутер методом createBrowserRouter(), который принимает массив. Массив представляет как раз роутинг внутри layout.
+Дочерние элементы будут рендериться на место <Outlet />
 
-In the project directory, you can run:
+Для деплоя после создания роутинга, точнее после массива нужно указать базовый адрес, чтоб корректно работали переходы. К примеру:
+{basename: '/app/'}
+ Почитать об этом! (Может исправили.)
 
-### `npm start`
+Чтоб работали правильно ссылки, их нужно ИЛИ переделать в компонент <Link /> ЛИБО открывать в новом окне и указать поддеррикторию /app/ в урле.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Для того, чтоб роутинг работал без перезагрузки страницы нужно:
+  - Использовать компонент :
+  <Link to="/path"> Page </Link>
+Библиотека react-router-dom отслушивает url адресс и на основании данного адреса рендерить контент.
+Для получения АКТИВНОЙ ссылки используется компонент:
+  <NavLink />
+  Ему нужно указать значение className - функцию
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+# Хуки Реакта:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. <useState> - хранилище состояния и управления им.
+    /*
+    useState - хранилище состояний,
+    который имеет 
+      - переменную состояния,
+      - метод его изменения
+    */
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. <useEffect> - Принимает коллбек, который будет запущен во время загрузки используемого компонента:
+useEffecr(() => {
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+})
+Объединяет в себе все возможные жизненные циклы компонента:
+  - инициализация,
+  - рендер,
+  - дестрой,
+  - ...
 
-### `npm run eject`
+Так же нужно добавить после фигурных скобок такую конструкцию:
+[todos, id, navigate]
+Чтоб отслеживать изменения в todos, id или navigate (пример в файле ItemInfo.tsx). Как только один из этих эффектов поменяется, а мы еще будем находится на данной странице, то useEffect отработает снова и перерисует весь компонент.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. <useParams> - используется для получения параметров запроса.
+Например:
+  - { id } - получает id динамического переданного url запроса (имя(id) указываю в главном файле рендеринга)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. <useNavigate> - перенаправляет на указанный адрес
+  useNavigate('/404)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Установил библиотеку - react-toastify
+Используется для всплывающих окон при взаимодействии с кнопками toDoItem
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Redux Toolkit ( менеджер состояния приложения )
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Оборачиваю всё приложение в некий провайдер, в который передаю store

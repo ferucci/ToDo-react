@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #faffe2;
+    --toDoBgItemColor: #eefff7;
+    --notDone: #313131;
+    --notDone-icon: red;
+    --done: #0d0d0d;
+    --done-icon: #506c50;
+    --headerBg: #f9f9f9;
+    --formBg: var(--bg-color);
+    --white: #dbdddc;
+    --link-color: #4f1717;
+
+    --height: 50px;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: clamp(120%, 3vw, 150%);
+    color: black;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10rem 2rem 0 2rem;
+    row-gap: 1rem;
+}
+
+.links {
+    padding: clamp(1rem, 5vw, 5rem);
+}
