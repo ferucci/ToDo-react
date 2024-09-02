@@ -1,13 +1,13 @@
 .form-wrapper {
   width: min(70%, 30rem);
-  height: 5rem;
+  height: var(--form-input-height);
 
-  position: relative;
-  padding: 15px;
-  z-index: 5;
+  position: fixed;
+  padding: 1rem;
+  z-index: 1;
 
   background-color: var(--formBg);
-  box-shadow: 0 2px 4px rgba(44, 62, 80, 0.15);
+  box-shadow: 0 2px 4px var(--box-shadow);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -23,7 +23,7 @@
 .form-wrapper form input {
   width: 100%;
   height: var(--height);
-  color: #fff;
+  color: var(--text);
   font-size: clamp(.8rem, 5vw, 1.2rem);
   font-weight: normal;
   text-indent: 1rem;
@@ -46,9 +46,10 @@
 }
 
 .form-wrapper form button {
+  display: flex;
+  align-items: center;
   width: clamp(2rem, 4vw, 2.5rem);
   height: clamp(2rem, 4vw, 2.5rem);
-  background: transparent url(../../assets/images/plus.png) no-repeat center/cover;
   position: absolute;
   top: 50%;
   right: clamp(1.4rem, 2vw, 3rem);
@@ -60,4 +61,8 @@
   box-shadow: none;
   outline: none;
   cursor: pointer;
+
+  svg {
+    transform: scale(1.44)
+  }
 }

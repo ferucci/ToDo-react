@@ -3,7 +3,9 @@ export interface ToDo {
   text: string,
   description?: string,
   notes?: [],
-  isDone: boolean
+  isDone: boolean,
+  urlPhoto?: string,
+  color?: string
 }
 
 export interface CompoProps {

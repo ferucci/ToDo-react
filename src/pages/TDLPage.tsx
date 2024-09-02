@@ -2,48 +2,43 @@ import { Form } from "../components/Form/Form"
 import { ToDoList } from "../components/ToDoList/ToDoList"
 import { Reclame } from "../components/Реклама/Index"
 
-import { useState } from "react";
-
-import { todos as data } from '../data/index';
 import { ToDo } from "../Interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { createAction, deleteAction, updateAction } from "../feature/todoList";
+import { ThemeContext, themes } from "../contexts/ThemeContext";
+import { Toggle } from "../components/ToggleTheme/Toggle";
 
 export const TDLPage = () => {
-  // Типизирую получаемые данные: useState<ToDo[]>
-  const [todos, setTodos] = useState<ToDo[]>(data);
+  // Получаю данные с помощью Redux
+  const todoList = useSelector((state: RootState) => state.todoList.todos);
+  const dispath = useDispatch()
 
   const createNewToDo = (text: string) => {
-    const newToDo: ToDo = {
-      id: todos.length,
-      text: text,
-      isDone: false
-    }
-    // Добавляю все элементы из массива todos, а так же новую тудушку
-    setTodos([...todos, newToDo]);
+    dispath(createAction(text))
   }
   const updateToDo = (item: ToDo) => {
-    // map - изменяет объекты
-    const newTodos = todos.map(todo => {
-      if (todo.id === item.id) {
-        todo.isDone = !todo.isDone
-      }
-      return todo
-    })
-    setTodos(newTodos);
+    dispath(updateAction(item))
   }
   const deleteToDo = (item: ToDo) => {
-    const newTodos = todos.filter(todo => todo.id !== item.id)
-    setTodos(newTodos);
+    dispath(deleteAction(item))
   }
 
   return (
     <>
+      <ThemeContext.Consumer>
+        {({ theme, setTheme }: any) => (
+          <Toggle
+            onChange={() => {
+              if (theme === themes.light) setTheme(themes.dark)
+              if (theme === themes.dark) setTheme(themes.light)
+            }}
+            value={theme === themes.dark}
+          />
+        )}
+      </ThemeContext.Consumer>
       <Form createNewToDo={createNewToDo}></Form>
-      <ToDoList
-        todos={todos}
-        deleteToDo={deleteToDo}
-        updateToDo={updateToDo}
-      ></ToDoList>
-
+      <ToDoList todos={todoList} deleteToDo={deleteToDo} updateToDo={updateToDo} />
       <Reclame />
     </>
   )
