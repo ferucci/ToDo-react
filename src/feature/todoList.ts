@@ -18,11 +18,17 @@ export const todoSlice = createSlice({
   initialState,
   // reducer - некий мутатор нашего состояния
   reducers: {
-    createAction: (state, action: PayloadAction<string>) => {
+    createAction: (state, action: PayloadAction<{
+      text: string;
+      description: string,
+      color?: string
+    }>) => {
       const newToDo: ToDo = {
         id: state.todos.length,
         // Объект payload принимает наш текст
-        text: action.payload,
+        text: action.payload.text,
+        description: action.payload.description,
+        color: action.payload.color,
         isDone: false
       }
       state.todos = [...state.todos, newToDo]

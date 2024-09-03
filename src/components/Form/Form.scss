@@ -12,15 +12,28 @@
   border-bottom-left-radius: 10px;
 }
 
-.form-wrapper:has(form>label>:is(input[type='text'], button):focus) {
+.form-wrapper:has(form>label>:is(input[type='text'], button):focus),
+.form-wrapper:has(form>label textarea:focus) {
   width: 100%;
+}
+
+.form-wrapper>form>label>.descr {
+  overflow: hidden;
+  height: 0;
+}
+
+.form-wrapper:has(form>label>:is(input[type='text'], button):focus)>form>label>.descr,
+.form-wrapper:has(form>label textarea:focus)>form>label>.descr {
+  overflow: visible;
+  height: 100%;
 }
 
 .form-wrapper>form {
   border-radius: .33rem;
 }
 
-.form-wrapper form input {
+.form-wrapper form input,
+.form-wrapper form textarea {
   width: 100%;
   height: var(--height);
   color: var(--text);
@@ -35,6 +48,12 @@
   transition: all .3s;
   box-shadow: none;
   outline: none;
+}
+
+.form-wrapper>form>label>.descr>textarea {
+  margin-top: .5rem;
+  height: calc(var(--height) * 2.5);
+  padding: 1rem;
 }
 
 .form-wrapper form input:focus {

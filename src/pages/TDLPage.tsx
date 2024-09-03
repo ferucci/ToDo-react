@@ -14,8 +14,8 @@ export const TDLPage = () => {
   const todoList = useSelector((state: RootState) => state.todoList.todos);
   const dispath = useDispatch()
 
-  const createNewToDo = (text: string) => {
-    dispath(createAction(text))
+  const createNewToDo = (text: string, description: string, color?: string) => {
+    dispath(createAction({ text, description, color }))
   }
   const updateToDo = (item: ToDo) => {
     dispath(updateAction(item))

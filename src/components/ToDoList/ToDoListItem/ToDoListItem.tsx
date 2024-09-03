@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 import { ToDo } from "../../../Interfaces";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import data from "../../../data" - получать с помощью хука Redux-a useSelector
+
+import cls from '../../ListItem/ListItem.module.scss'
 
 export const ToDoListItem = (
   props: {
@@ -26,11 +29,14 @@ export const ToDoListItem = (
       default:
         break;
     }
-
   };
   return (
     <li className="todo-list-item__wrapper">
-      <span className={color ? `text` : ""}>{text}</span>
+      <Link to={`/list/${props.item.id}`}
+        className={`${cls.link} ${props.item.isDone ? cls.done : cls.notDone}`}>
+        <span className={props.item.color ? `grad-color` : ""}>{text}</span>
+      </Link>
+
       <div className="todo-list-item__buttons">
 
         <button

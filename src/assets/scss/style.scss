@@ -10,7 +10,7 @@
     --link-color: #4f1717;
     --box-shadow: rgba(44, 62, 80, 0.15);
     --text: #fff;
-    --btns-color: #000
+    --invert-color: #000
 }
 
 :root[data-theme="dark"] {
@@ -21,7 +21,7 @@
     --link-color: #757373;
     --box-shadow: rgba(172, 183, 194, 0.15);
     --text: #000;
-    --btns-color: #fff
+    --invert-color: #fff
 }
 
 :root {
@@ -63,6 +63,10 @@ body {
     background-size: min(25%, 15rem);
 }
 
+.links>ul {
+    max-height: 50vh;
+}
+
 button:has(svg):not(.form-button)>svg {
-    fill: var(--btns-color);
+    fill: var(--invert-color);
 }
